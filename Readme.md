@@ -74,7 +74,7 @@ if err != nil {
 // res.OpenID
 // res.SessionKey
 // res.UnionID
-fmt.Printf("返回结果: %#v", res)
+fmt.Printf("返回结果: %+v", res)
 
 
 ```
@@ -261,7 +261,7 @@ err := template.Send(openid, template, page, formID string, msg template.Message
 
 ## 统一服务消息
 
-小程序和公众号模板消息统一的服务消息下发接口(已经被官网下架 不建议使用)
+小程序和公众号模板消息统一的服务消息下发接口
 
 [官方文档](https://developers.weixin.qq.com/miniprogram/dev/api/notice-uniform.html)
 
@@ -269,11 +269,11 @@ err := template.Send(openid, template, page, formID string, msg template.Message
 
 // 消息体
 msg := template.UniformMsg{
-    ToUser: "用户 openid",
+    ToUser: "用户 openID",
     // 小程序模板消息
     WeappTemplateMsg: template.WeappTemplateMsg{
-        TemplateID:      schedule.ActivityWillStartTemplateID,
-        Page:            "pages/messages/main",
+        TemplateID:      "Your template ID",
+        Page:            "your/weapp/page/path",
         FormID:          "1537411865951",
         EmphasisKeyword: "keyword1.DATA",
         Data: template.Data{
@@ -294,7 +294,7 @@ msg := template.UniformMsg{
     // 公众号模板消息
     MPTemplateMsg: template.MPTemplateMsg{
         AppID:      "wx2c5a33d31b4ee88f",
-        TemplateID: "UmuX15eBoonYkLy-7Xle1rA6xHhv4bsbie1Viidg2Cs",
+        TemplateID:      "Your template ID",
         URL:        "https://medivhzhan.me",
         Miniprogram: template.Miniprogram{
             AppID:    "wx7ad9cfdc85a2fdb2",
@@ -436,7 +436,7 @@ if err != nil {
     return
 }
 
-fmt.Printf("返回结果: %#v", res)
+fmt.Printf("返回结果: %+v", res)
 
 // 获取小程序前点调用支付接口所需参数
 params, err := payment.GetParams(res.AppID, "微信支付密钥", res.NonceStr, res.PrePayID)
@@ -458,7 +458,7 @@ import "github.com/medivhzhan/weapp/payment"
 // 必须在下单时指定的 notify_url 的路由处理器下
 err := payment.HandlePaidNotify(w http.ResponseWriter, req *http.Request,  func(ntf payment.PaidNotify) (bool, string) {
     // 处理通知
-    fmt.Printf("%#v", ntf)
+    fmt.Printf("返回结果%+v", ntf)
 
     // 处理成功 return true, ""
     // or
@@ -498,7 +498,7 @@ if err != nil {
     return
 }
 
-fmt.Printf("返回结果: %#v", res)
+fmt.Printf("返回结果: %+v", res)
 
 ```
 
@@ -512,7 +512,7 @@ import "github.com/medivhzhan/weapp/payment"
 
 // 必须在商户平台上配置的回调地址或者发起退款时指定的 notify_url 的路由处理器下
 err := payment.HandleRefundedNotify(w http.ResponseWriter, req *http.Request,  "支付密钥", func(ntf payment.RefundedNotify) (bool,         // 处理通知
-    fmt.Printf("%#v", ntf)
+    fmt.Printf("%+v", ntf)
 
     // 处理成功 return true, ""
     // or
@@ -554,7 +554,7 @@ if err != nil {
     return
 }
 
-fmt.Printf("返回结果: %#v", res)
+fmt.Printf("返回结果: %+v", res)
 
 ```
 
@@ -580,7 +580,7 @@ if err != nil {
     return
 }
 
-fmt.Printf("返回结果: %#v", res)
+fmt.Printf("返回结果: %+v", res)
 
 ```
 
@@ -603,7 +603,7 @@ import "github.com/medivhzhan/weapp"
 // @iv 小程序通过 api 得到的初始向量(iv)
 phone , err := weapp.DecryptPhoneNumber(ssk, data, iv string)
 
-fmt.Printf("手机数据: %#v", phone)
+fmt.Printf("手机数据: %+v", phone)
 
 ```
 
@@ -646,7 +646,7 @@ if err != nil {
     return
 }
 
-fmt.Printf("用户数据: %#v", ui)
+fmt.Printf("用户数据: %+v", ui)
 
 ```
 
@@ -671,7 +671,7 @@ if err != nil {
     return
 }
 
-fmt.Printf("返回结果: %#v", res)
+fmt.Printf("返回结果: %+v", res)
 
 // 网络图片检测
 //
@@ -682,7 +682,7 @@ if err != nil {
     return
 }
 
-fmt.Printf("返回结果: %#v", res)
+fmt.Printf("返回结果: %+v", res)
 
 ```
 
@@ -703,6 +703,6 @@ if err != nil {
     return
 }
 
-fmt.Printf("返回结果: %#v", res)
+fmt.Printf("返回结果: %+v", res)
 
 ```

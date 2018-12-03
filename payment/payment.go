@@ -282,13 +282,13 @@ func newReplay(ok bool, msg string) replay {
 
 // HandlePaidNotify 处理支付结果通知
 func HandlePaidNotify(res http.ResponseWriter, req *http.Request, fuck func(PaidNotify) (bool, string)) error {
-	body, err := ioutil.ReadAll(req.Body)
+	raw, err := ioutil.ReadAll(req.Body)
 	if err != nil {
 		return err
 	}
 
 	var ntf paidNotify
-	if err := xml.Unmarshal(body, &ntf); err != nil {
+	if err := xml.Unmarshal(raw, &ntf); err != nil {
 		return err
 	}
 
@@ -298,13 +298,13 @@ func HandlePaidNotify(res http.ResponseWriter, req *http.Request, fuck func(Paid
 
 	replay := newReplay(fuck(ntf.PaidNotify))
 
-	b, err := xml.Marshal(replay)
+	raw, err = xml.Marshal(replay)
 	if err != nil {
 		return err
 	}
 
 	res.WriteHeader(http.StatusOK)
-	_, err = res.Write(b)
+	_, err = res.Write(raw)
 
 	return err
 }

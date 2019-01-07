@@ -1,12 +1,13 @@
 package weapp
 
 import (
+	"crypto/tls"
 	"encoding/json"
 	"errors"
 	"net/http"
 	"net/url"
 
-	"github.com/medivhzhan/weapp/util"
+	"github.com/robo2025/weapp/util"
 )
 
 const (
@@ -78,7 +79,14 @@ func Login(appID, secret, code string) (lres LoginResponse, err error) {
 		return
 	}
 
-	res, err := http.Get(api)
+	//res, err := http.Get(api)
+	req, err := http.NewRequest("GET", api, nil)
+	//忽略证书校验
+	tr := &http.Transport{
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+	}
+	client := &http.Client{Transport: tr}
+	res, err := client.Do(req)
 	if err != nil {
 		return
 	}

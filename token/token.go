@@ -8,7 +8,7 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/medivhzhan/weapp"
+	"github.com/robo2025/weapp"
 )
 
 const tokenAPI = "/cgi-bin/token"
